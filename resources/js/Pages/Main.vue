@@ -38,7 +38,7 @@ const openLogin = ref(false);
             <h2 class="card-title">Card Title</h2>
             <p>Gestión de proyectos</p>
             <div class="card-actions justify-end">
-              <Link as="button" href="projects" class="btn btn-primary">Proyectos</Link>
+              <Link as="button" href="project" class="btn btn-primary">Proyectos</Link>
             </div>
           </div>
         </div>
