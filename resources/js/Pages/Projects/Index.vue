@@ -1,7 +1,30 @@
 <script setup>
 import Layout from "@/Layouts/Layout.vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({fieldLabels: Object, projects: Array});
+const ascendente = ref(false);
+const fieldOrder = ref(Object.keys(props.fieldLabels)[0]);
+const projectsOrdered = computed(() => {
+  return [...props.projects].sort((a, b) => {
+    let aValue = a[fieldOrder.value];
+    let bValue = b[fieldOrder.value];
+
+    if (aValue > bValue) {
+      return ascendente.value ? 1 : -1;
+    } else {
+      return ascendente.value ? -1 : 1;
+    }
+  })
+})
+const sort=(field) => {
+  if(field === fieldOrder.value) {
+    ascendente.value = !ascendente.value;
+  } else {
+    fieldOrder.value = field
+    ascendente.value = true;
+  }
+}
 
 </script>
 
@@ -12,13 +35,16 @@ const props = defineProps({fieldLabels: Object, projects: Array});
         <thead>
         <tr>
           <!-- Importante hacerlo de esta manera -->
-          <th v-for="(label, field) in fieldLabels" :key="field">
+          <th @click="sort(field)" v-for="(label, field) in fieldLabels" :key="field">
             {{label}}
+            <span v-if="field === fieldOrder" class="cursor-default">
+              {{ascendente ? "▲" : "▼"}}
+            </span>
           </th>
         </tr>
         </thead>
         <tbody>
-          <tr v-for="project in projects" :key="project.id">
+          <tr v-for="project in projectsOrdered" :key="project.id">
             <td v-for="(label, field) in fieldLabels">
               {{project[field]}}
             </td>
