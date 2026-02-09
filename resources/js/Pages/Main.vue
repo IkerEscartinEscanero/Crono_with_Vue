@@ -17,25 +17,27 @@ const openLogin = ref(false);
         <div class="card bg-base-100 w-96 shadow-sm">
           <figure>
             <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"/>
+                src="https://img.freepik.com/vector-gratis/temporizador-cronometro-es-color-rojo_78370-8122.jpg?semt=ais_hybrid&w=740&q=80"
+                alt="Shoes"
+                height="255px"
+                width="255px"/>
           </figure>
           <div class="card-body">
-            <h2 class="card-title">Card Title</h2>
+            <h2 class="card-title">CRONÓMETRO</h2>
             <p>Ver cronómetro</p>
             <div class="card-actions justify-end">
-              <Link as="button" href="cronometro" class="btn btn-primary">Cronómetro</Link>
+              <Link as="button" href="crono" class="btn btn-primary">Cronómetro</Link>
             </div>
           </div>
         </div>
         <div class="card bg-base-100 w-96 shadow-sm">
           <figure>
             <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                src="https://www.itmplatform.com/wp-content/uploads/Gesti%C3%B3n-de-Proyectos-5-Requisitos-del-%C3%89xito.png"
                 alt="Shoes"/>
           </figure>
           <div class="card-body">
-            <h2 class="card-title">Card Title</h2>
+            <h2 class="card-title">PROYECTOS</h2>
             <p>Gestión de proyectos</p>
             <div class="card-actions justify-end">
               <Link as="button" href="projects" class="btn btn-primary">Proyectos</Link>
@@ -63,7 +65,7 @@ const openLogin = ref(false);
       </div>
     </div>
     <Modal :show="openLogin" @close="openLogin=false">
-      <Login/>
+      <Login @close="openLogin=false"/>
     </Modal>
   </Layout>
 </template>

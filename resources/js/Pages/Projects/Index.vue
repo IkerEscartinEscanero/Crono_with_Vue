@@ -58,8 +58,8 @@ const destroy = (id) => {
           <td v-for="(label, field) in fieldLabels">
             {{ project[field] }}
           </td>
-          <td class="btn btn-sm btn-glass p-1 cursor-pointer">Editar</td>
-          <td @click="destroy(project.id)" class="btn btn-sm btn-glass p-1 cursor-pointer">Borrar</td>
+          <td class="btn btn-sm btn-glass p-1 cursor-pointer">✏️</td>
+          <td @click="destroy(project.id)" class="btn btn-sm btn-glass p-1 cursor-pointer">🗑️</td>
         </tr>
         </tbody>
       </table>
