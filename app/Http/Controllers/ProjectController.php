@@ -24,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Projects/Create');
     }
 
     /**
@@ -32,7 +32,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $fields = $request->input();
+        Project::create($fields);
+        return redirect()->route('projects.index');
     }
 
     /**
@@ -48,7 +50,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return Inertia::render('Projects/Edit', ['project' => $project]);
     }
 
     /**
@@ -56,7 +58,9 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update($request->input());
+        // Solicitud que resuelve Inertia
+        return redirect()->route('projects.index');
     }
 
     /**

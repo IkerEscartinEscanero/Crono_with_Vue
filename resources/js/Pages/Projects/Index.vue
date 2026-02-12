@@ -5,7 +5,7 @@ import {router} from "@inertiajs/vue3";
 
 const props = defineProps({fieldLabels: Object, projects: Array});
 const ascendente = ref(false);
-const fieldOrder = ref(Object.keys(props.fieldLabels)[0]);
+const fieldOrder = ref(Object.keys(props.fieldLabels).length ? Object.keys(props.fieldLabels)[0] : null);
 const projectsOrdered = computed(() => {
   return [...props.projects].sort((a, b) => {
     let aValue = a[fieldOrder.value];
@@ -34,11 +34,16 @@ const destroy = (id) => {
   router.delete(route("projects.destroy", id));
 }
 
+const add = () => {
+  router.get(route("projects.create"));
+}
+
 </script>
 
 <template>
   <Layout>
     <div class="overflow-x-auto h-96">
+      <h1><button class="btn btn-primary" @click="add">Añadir proyecto</button></h1>
       <table class="table table-xs table-pin-rows table-pin-cols">
         <thead>
         <tr>
@@ -58,8 +63,8 @@ const destroy = (id) => {
           <td v-for="(label, field) in fieldLabels">
             {{ project[field] }}
           </td>
-          <td class="btn btn-sm btn-glass p-1 cursor-pointer">✏️</td>
-          <td @click="destroy(project.id)" class="btn btn-sm btn-glass p-1 cursor-pointer">🗑️</td>
+          <td><button class="btn btn-sm btn-glass p-1 cursor-pointer" @click="router.get(route('projects.edit', project.id))">✏️</button></td>
+          <td><button @click="destroy(project.id)" class="btn btn-sm btn-glass p-1 cursor-pointer">🗑️</button></td>
         </tr>
         </tbody>
       </table>
