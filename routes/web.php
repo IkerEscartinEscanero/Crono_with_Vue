@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -9,14 +11,7 @@ use Inertia\Inertia;
 Route::get("crono", fn() => Inertia::render("Cronometro"));
 //Route::get("main", fn() => Inertia::render("Main"));
 
-Route::get('/', function () {
-    return Inertia::render('Main', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('main');
+Route::get('/', MainController::class)->name('main');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -29,5 +24,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource("projects", ProjectController::class);
+Route::resource("users", UserController::class);
+
+Route::get("teachers", [UserController::class, "getTeachers"])->name("teachers.index");
+Route::get("students", [UserController::class, "getStudents"])->name("students.index");
 
 require __DIR__.'/auth.php';
