@@ -7,7 +7,7 @@ const emit = defineEmits(['open-modal']);
 </script>
 
 <template>
-<Header @open-modal="emit('open-modal')"/>
+<Header @open-modal="type => emit('open-modal', type)"/>
   <Nav/>
   <slot/>
   <Footer/>

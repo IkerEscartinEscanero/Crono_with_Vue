@@ -5,16 +5,30 @@ import {computed, ref} from "vue";
 import Modal from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/Modal.vue";
 import Login from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Pages/Auth/Login.vue";
 import Card from "@/Components/Card.vue";
+import Register from "../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Pages/Auth/Register.vue";
 
 const user = computed(() => usePage().props.auth.user);
 const props = defineProps({cards:Object});
 
 const openLogin = ref(false);
+const openRegister = ref(false);
+const handleOpenModal = (type) => {
+  openLogin.value = false;
+  openRegister.value = false;
+
+  if (type === 'login') {
+    openLogin.value = true;
+  }
+  if (type === 'register') {
+    openRegister.value = true;
+  }
+}
+
 
 </script>
 
 <template>
-  <Layout @open-modal="openLogin=true">
+  <Layout @open-modal="handleOpenModal">
     <div v-if="user">
       <div class="flex flex-row justify-start items-center p-5 gap-2">
         <Card v-for="card in props.cards" :key="card.title"
@@ -47,6 +61,9 @@ const openLogin = ref(false);
     </div>
     <Modal :show="openLogin" @close="openLogin=false">
       <Login @close="openLogin=false"/>
+    </Modal>
+    <Modal :show="openRegister" @close="openRegister=false">
+      <Register @close="openRegister=false"/>
     </Modal>
   </Layout>
 </template>

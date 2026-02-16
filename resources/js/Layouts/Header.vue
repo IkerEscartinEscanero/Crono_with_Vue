@@ -19,10 +19,8 @@ const emit = defineEmits(['open-modal']);
     </div>
     <div v-else>
       <div class="flex flex-row justify-start items-center p-5 gap-2">
-          <button @click="emit('open-modal')" class="btn btn-sm btn-primary">Login</button>
-        <Link href="register">
-          <button class="btn btn-sm btn-primary">Register</button>
-        </Link>
+        <button @click="emit('open-modal', 'login')" class="btn btn-sm btn-primary">Login</button>
+        <button @click="emit('open-modal', 'register')" class="btn btn-sm btn-primary">Register</button>
       </div>
     </div>
   </header>
